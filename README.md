@@ -13,6 +13,59 @@ Things you may want to cover:
 
 * Database creation
 
+## userテーブル
+
+| Column       | Type    | Options     |
+| ------------ | ------- | ----------- |
+| nickname     | string  | null: false |
+| mail         | string  | null: false |
+| password     | string  | null: false |
+| name         | string  | null: false |
+| name_reading | string  | null: false |
+| birthday     | date    | null: false |
+
+### Association
+- has_many :item
+- has_many :purchaser
+
+
+## itemテーブル
+
+| Column           | Type       | Options                        |
+|------------------|------------|--------------------------------|
+| item_image       | string     | null: false                    |
+| item_name        | string     | null: false                    |
+| item_description | text       | null: false                    |
+| item_category    | integer    | null: false                    |
+| item_status      | integer    | null: false                    |
+| delivery_fee     | integer    | null: false                    |
+| shipper_area     | integer    | null: false                    |
+| shipment_date    | date       | null: false                    |
+| item_price       | integer    | null: false                    |
+| purchaser_id     | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
+- has_one    :purchaser
+
+
+## purchaserテーブル
+
+| Column       | Type       | Options                        |
+|--------------|------------|--------------------------------|
+| item_id      | references | null: false, foreign_key: true |
+| postal_code  | integer    | null: false                    |
+| prefecture   | integer    | null: false                    |
+| city         | string     | null: false                    |
+| house_number | string     | null: false                    |
+| building     | string     |                                |
+| phone_number | integer    | null: false                    |
+
+### Association
+- belongs_to :user
+- belongs_to :item
+
+
 * Database initialization
 
 * How to run the test suite
