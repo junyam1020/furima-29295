@@ -14,6 +14,7 @@ Things you may want to cover:
 * Database creation
 
 ## userテーブル
+## usersテーブル
 
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
@@ -28,11 +29,10 @@ Things you may want to cover:
 
 ### Association
 - has_many :items
-- has_many :purchasers
 - has_many :deals
 
 
-## itemテーブル
+## itemsテーブル
 
 | Column        | Type       | Options                        |
 |---------------|------------|--------------------------------|
@@ -44,45 +44,41 @@ Things you may want to cover:
 | delivery_fee  | integer    | null: false                    |
 | shipper_area  | integer    | null: false                    |
 | shipment_date | integer    | null: false                    |
-| item_price    | integer    | null: false                    |
-| purchaser_id  | references | null: false, foreign_key: true |
+| price         | integer    | null: false                    |
+| user_id       | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- has_one    :purchaser
 - belongs_to :deal
 
 
-## purchaserテーブル
+## dealsテーブル
+
+| Column  | Type       | Options                        |
+|---------|------------|--------------------------------|
+| item_id | references | null: false, foreign_key: true |
+| user_id | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one    :destination
+
+
+## destinationsテーブル
 
 | Column       | Type       | Options                        |
 |--------------|------------|--------------------------------|
-| item_id      | references | null: false, foreign_key: true |
 | postal_code  | string     | null: false                    |
 | prefecture   | integer    | null: false                    |
 | city         | string     | null: false                    |
 | house_number | string     | null: false                    |
 | building     | string     |                                |
 | phone_number | string     | null: false                    |
+| item_id      | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
-- belongs_to :item
-- belongs_to :purchaser
-
-
-
-## dealテーブル
-
-| Column          | Type       | Options                        |
-|-----------------|------------|--------------------------------|
-| user_id         | references | null: false, foreign_key: true |
-| item_id         | references | null: false, foreign_key: true |
-
-### Association
-- belongs_to :user
-- belongs_to :item
-- has_one    :purchaser
+- belongs_to :deal
 
 
 * Database initialization
