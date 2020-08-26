@@ -15,14 +15,18 @@ Things you may want to cover:
 
 ## userテーブル
 
-| Column       | Type    | Options     |
-| ------------ | ------- | ----------- |
-| nickname     | string  | null: false |
-| mail         | string  | null: false |
-| password     | string  | null: false |
-| name         | string  | null: false |
-| name_reading | string  | null: false |
-| birthday     | date    | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| nickname           | string  | null: false |
+| email              | string  | null: false |
+| password           | string  | null: false |
+| last_name          | string  | null: false |
+| first_name         | string  | null: false |
+| last_name_reading  | string  | null: false |
+| first_name_reading | string  | null: false |
+| birth_year         | integer | null: false |
+| birth_month        | integer | null: false |
+| birth_day          | integer | null: false |
 
 ### Association
 - has_many :items
@@ -32,18 +36,18 @@ Things you may want to cover:
 
 ## itemテーブル
 
-| Column           | Type       | Options                        |
-|------------------|------------|--------------------------------|
-| item_image       | string     | null: false                    |
-| item_name        | string     | null: false                    |
-| item_description | text       | null: false                    |
-| item_category    | integer    | null: false                    |
-| item_status      | integer    | null: false                    |
-| delivery_fee     | integer    | null: false                    |
-| shipper_area     | integer    | null: false                    |
-| shipment_date    | integer    | null: false                    |
-| item_price       | integer    | null: false                    |
-| purchaser_id     | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+|---------------|------------|--------------------------------|
+| image         | string     | null: false                    |
+| name          | string     | null: false                    |
+| description   | text       | null: false                    |
+| category      | integer    | null: false                    |
+| status        | integer    | null: false                    |
+| delivery_fee  | integer    | null: false                    |
+| shipper_area  | integer    | null: false                    |
+| shipment_date | integer    | null: false                    |
+| item_price    | integer    | null: false                    |
+| purchaser_id  | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -56,7 +60,7 @@ Things you may want to cover:
 | Column       | Type       | Options                        |
 |--------------|------------|--------------------------------|
 | item_id      | references | null: false, foreign_key: true |
-| postal_code  | string    | null: false                    |
+| postal_code  | string     | null: false                    |
 | prefecture   | integer    | null: false                    |
 | city         | string     | null: false                    |
 | house_number | string     | null: false                    |
@@ -66,6 +70,8 @@ Things you may want to cover:
 ### Association
 - belongs_to :user
 - belongs_to :item
+- belongs_to :purchaser
+
 
 
 ## dealテーブル
@@ -74,13 +80,11 @@ Things you may want to cover:
 |-----------------|------------|--------------------------------|
 | user_id         | references | null: false, foreign_key: true |
 | item_id         | references | null: false, foreign_key: true |
-| deal_sum        | integer    | null: false                    |
-| deal_commission | integer    | null: false                    |
-| deal_profit     | integer    | null: false                    |
 
 ### Association
 - belongs_to :user
 - belongs_to :item
+- has_one    :purchaser
 
 
 * Database initialization
