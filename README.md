@@ -44,19 +44,19 @@ Things you may want to cover:
 | shipper_area  | integer    | null: false                    |
 | shipment_date | integer    | null: false                    |
 | price         | integer    | null: false                    |
-| user_id       | references | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- belongs_to :deal
+- has_one :deal
 
 
 ## dealsテーブル
 
 | Column  | Type       | Options                        |
 |---------|------------|--------------------------------|
-| item_id | references | null: false, foreign_key: true |
-| user_id | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
+| user    | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -74,7 +74,7 @@ Things you may want to cover:
 | house_number | string     | null: false                    |
 | building     | string     |                                |
 | phone_number | string     | null: false                    |
-| item_id      | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :deal
