@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-
   validates :image, presence: true
   validates :name, presence: true
   validates :description, presence: true
