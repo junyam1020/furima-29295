@@ -29,33 +29,33 @@ RSpec.describe Item, type: :model do
     end
 
     it 'カテゴリーidが0の場合登録できないこと' do
-      @item.category_id = ''
+      @item.category_id = 0
       @item.valid?
-      expect(@item.errors.full_messages).to include("Category can't be blank")
+      expect(@item.errors.full_messages).to include('Category must be other than 0')
     end
 
     it '商品の状態idが0の場合登録できないこと' do
-      @item.status_id = ''
+      @item.status_id = 0
       @item.valid?
-      expect(@item.errors.full_messages).to include("Status can't be blank")
+      expect(@item.errors.full_messages).to include('Status must be other than 0')
     end
 
     it '配送料の負担idが0の場合登録できないこと' do
-      @item.delivery_fee_id = ''
+      @item.delivery_fee_id = 0
       @item.valid?
-      expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
+      expect(@item.errors.full_messages).to include('Delivery fee must be other than 0')
     end
 
     it '発送元の地域idが0の場合登録できないこと' do
-      @item.shipper_area_id = ''
+      @item.shipper_area_id = 0
       @item.valid?
-      expect(@item.errors.full_messages).to include("Shipper area can't be blank")
+      expect(@item.errors.full_messages).to include('Shipper area must be other than 0')
     end
 
     it '発送までの日数idが0の場合登録できないこと' do
-      @item.shipment_date_id = ''
+      @item.shipment_date_id = 0
       @item.valid?
-      expect(@item.errors.full_messages).to include("Shipment date can't be blank")
+      expect(@item.errors.full_messages).to include('Shipment date must be other than 0')
     end
 
     it '価格が空の場合登録できないこと' do
