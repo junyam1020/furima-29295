@@ -34,7 +34,15 @@
       <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
     <% elsif user_signed_in? %>
     <%# 商品が売れていない場合はこちらを表示しましょう %>
-      <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+      <% @deals.each do |deal| %>
+        <% if @item.id == deal.item_id %>
+          <% @judge_deal = true  %>
+          <% break %>
+        <% end %>
+      <% end %>
+      <% unless @judge_deal %>
+        <%= link_to '購入画面に進む', item_deals_path(@item.id),class:"item-red-btn"%>
+      <% end %>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
     <% end %>
     <%# // ログインしているユーザと出品しているユーザが同一人物である時、商品の編集と削除を表示にしましょう %>
