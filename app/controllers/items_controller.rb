@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :search_deal, only: [:index, :new, :show]
 
   def index
     @items = Item.order('created_at DESC')
-    @deals = Deal.all
   end
 
   def new
@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @deals = Deal.all
+    @judge_deal = false
   end
 
   def edit
@@ -47,6 +47,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def search_deal
+    @deals = Deal.all
+  end
 
   def set_item
     @item = Item.find(params[:id])
