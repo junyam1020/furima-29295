@@ -1,11 +1,15 @@
 class DealsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item
+
   def index
-    @item = Item.find(params[:item_id])
     @deal = DealDestination.new
     @deals = Deal.all
     @deals.each do |deal|
-      if @item.id == deal.item_id
+      if @item.user_id == current_user.id
+        redirect_to root_path
+        break
+      elsif @item.id == deal.item_id
         redirect_to root_path
         break
       end
@@ -13,8 +17,6 @@ class DealsController < ApplicationController
   end
 
   def create
-    # paramsにitem_idを持っているため、その値でfindする
-    @item = Item.find(params[:item_id])
     # FormオブジェクトであるDealDestinationにdeal_paramsを指定する
     @deal = DealDestination.new(deal_params)
     # 入力情報に問題ないか確認
@@ -30,6 +32,10 @@ class DealsController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
   def deal_params
     # 今回フォームの入力値を対象のカラムに保持するためparamsで扱う許可をする
